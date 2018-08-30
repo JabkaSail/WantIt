@@ -54,7 +54,7 @@ module.exports = function(app){
           res.redirect('/groups');
             }
                       else{
-                          if (popa[0].User == req.body.login || popa[0].passwor == req.body.password){
+                          if (popa[0].User == req.body.login && popa[0].passwor == req.body.password){
                                req.session.User = req.body.login;
           res.redirect('/groups');
                           }
