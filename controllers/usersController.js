@@ -35,11 +35,16 @@ module.exports = function(app){
        //POST Req  
        
      app.post('/registration', urlencodedParser, function(req, res){
+         var  User = req.body.login.replace(/^\s+|\s+$/g, '');
+          var    password = req.body.password.replace(/^\s+|\s+$/g, '');
         var values = {
-        User: req.body.login,
-        password: req.body.password
+        User: req.body.login.replace(/^\s+|\s+$/g, ''),
+        password: req.body.password.replace(/^\s+|\s+$/g, '')
     }
-          
+          if (User == "" || password == ""){
+                   res.render('reg',{CurrentLogin: 1, proverka: 1});
+          }
+         else {
                   con.query("SELECT User, password FROM `UserDb` WHERE `User` = ?", [req.body.login], function (err, rows, result) {
         if (err) throw err;
                        var popa = JSON.parse(JSON.stringify(rows));
@@ -54,22 +59,22 @@ module.exports = function(app){
           res.redirect('/groups');
             }
                       else{
-                          if (popa[0].User == req.body.login && popa[0].passwor == req.body.password){
+                          if (popa[0].User == req.body.login && popa[0].password == req.body.password){
                                req.session.User = req.body.login;
           res.redirect('/groups');
                           }
                           else{
-                          res.render('reg',{CurrentLogin: 1});
+                          res.render('reg',{CurrentLogin: 1, proverka: 0});
                       }
                           }
         });
-
+}
      });
      
     //GET Login Req     
        
      app.get('/login', function(req, res){
-         res.render('reg', {CurrentLogin: 0});
+      res.render('reg',{CurrentLogin: 1, proverka: 0});
       
      }); 
        

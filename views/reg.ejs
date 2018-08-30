@@ -83,6 +83,17 @@ button {
            </header>
      
 <style>
+    .button {
+    background-color: #1e1899;
+    border: none;
+    color: white;
+    width: 10%;
+    padding: 1% 2%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 100%;
+} 
 .top-fixed_ul {
     z-index: 100;
     list-style-type: none;
@@ -138,14 +149,25 @@ button {
        <form action="/registration" method="POST" align="center">
          <h1>Enter your login</h1>
            <% if (CurrentLogin == 1){ %>
-           <textarea rows="1" cols=100 name="login" placeholder="Choose another Login"></textarea>
+           <textarea rows="1" cols=100 class="input" name="login" placeholder="Choose another Login"></textarea>
            <% } else {  %>
           <textarea rows="1" cols=100 name="login"></textarea> 
             <% }  %>
          <h1>Enter your password</h1>
-           <textarea rows="1" cols=100 name="password"></textarea>
-           <p><input type="submit" value="Enter"></p>
-           
-     </form>
+           <textarea accesskey="Enter" rows="1" class="input" cols=100 name="password"></textarea>
+           <p><input id="1" class="button" type="submit" value="Enter"></p>
+           <% if (proverka == 1){%>
+           <label>Пожалуйста, заполните все поля!</label>
+           <%} %>
+     </form>     
+       <script>
+                          $(".input").keyup(function(event){
+                          if(event.keyCode == 13){
+                          $("#1").click();
+                          $(this).val('');
+                                                 }
+                                                                   });
+                      </script>
+     
       </body>
 </html>
