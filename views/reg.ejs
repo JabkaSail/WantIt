@@ -163,13 +163,13 @@ button {
        <form action="/registration" method="POST" align="center">
          <h1>Enter your login</h1>
            <% if (CurrentLogin == 1){ %>
-              <input type="text" style="text-align:center;" size="75" id="login" class="input"  placeholder="Choose another Login"/>
+              <input type="text" name="login" style="text-align:center;" size="75" id="login" class="input"  placeholder="Choose another Login"/>
            <% } else {  %>
-          <input id="login" placeholder="Choose your Login" type="text" rows="1" size="75"/> 
+          <input id="login" name="login" placeholder="Choose your Login" type="text" rows="1" size="75"/> 
             <% }  %>
          <h1>Enter your password</h1>
-           <input type="text" style="text-align:center;" id="password" wrap='hard' placeholder="Choose your password" accesskey="Enter" size="75"/>
-           <p><input type="button" id="1" class="button" id="Enterbutton" type="submit" value="Enter"></p>
+           <input name="password" type="text" style="text-align:center;" id="password" wrap='hard' placeholder="Choose your password" accesskey="Enter" size="75"/>
+           <p><input id="1" class="button" id="Enterbutton" type="submit" value="Enter"></p>
            <% if (proverka == 1){%>
            <label>Пожалуйста, заполните все поля!</label>
            <%} %>
