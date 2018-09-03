@@ -194,23 +194,23 @@ module.exports = function(app){
           if (req.session.User != null){
                var str = req.params.code;
                var spliter = str.split("-");
-              var value = {
+             
+              var Group =  spliter[0];
+              con.query("SELECT * FROM `GroupsDb` WHERE `Name` = ?", [Group], function (err, rows, result) {
+                   var popa = JSON.parse(JSON.stringify(rows));
+                  if (popa[0].InviteCode == str){
+                      
+                  var value = {
                   group: spliter[0]
               }
            con.query("UPDATE `UserDb` SET ? WHERE User = ?", [value, req.session.User], function (err, rows, result) {
         if (err) throw err;
-              var Group =  spliter[0];
-               console.log(spliter);
                value = {
                    InviteCode: uniqid(Group+'-')
                }
           
         con.query("UPDATE `GroupsDb` SET ? WHERE Name = ?", [value, Group], function (err, rows, result) {
         if (err) throw err;
-            
-             con.query("SELECT * FROM `GroupsDb` WHERE `Name` = ?", [Group], function (err, rows, result) {
-        if (err) throw err;
-                 var popa = JSON.parse(JSON.stringify(rows));
             
             value = {
         uniqid: popa[0].uniqid,
@@ -224,12 +224,18 @@ module.exports = function(app){
             con.query("INSERT INTO GroupsDb SET ?", value, function (err, rows, fields) {
         res.redirect('/groups');
                     });
-                 });
+              
                });
                 });
+                       }
+                  else {
+                      req.redirect('/groups');
+                  }
+                   });
                }
                     
                     else{
+                        req.session.gCode = req.params.code;
                        res.redirect('/login');
                     }
         });

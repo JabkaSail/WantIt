@@ -67,12 +67,15 @@ button {
     background-color: #1e1899;
     border: none;
     color: white;
+  
     width: 10%;
     padding: 1% 2%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 100%;
+     -webkit-border-radius: 5px;
+    border-radius: 5px;
 }        
      </style>
  </head>
@@ -93,6 +96,8 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 100%;
+           -webkit-border-radius: 5px;
+    border-radius: 5px;
 } 
 .top-fixed_ul {
     z-index: 100;
@@ -140,6 +145,15 @@ button {
     text-decoration: none;
         color: gray;
 }     
+    
+    input[type="text"] {
+  
+   padding-bottom: 1%;
+ 
+   padding-top: 1%;
+   border: 1px solid black;
+   border-radius: 5px;
+}
     .wishes:hover{
            text-decoration: underline;
    
@@ -149,24 +163,33 @@ button {
        <form action="/registration" method="POST" align="center">
          <h1>Enter your login</h1>
            <% if (CurrentLogin == 1){ %>
-           <textarea rows="1" cols=100 class="input" name="login" placeholder="Choose another Login"></textarea>
+              <input type="text" style="text-align:center;" size="75" id="login" class="input"  placeholder="Choose another Login"/>
            <% } else {  %>
-          <textarea rows="1" cols=100 name="login"></textarea> 
+          <input id="login" placeholder="Choose your Login" type="text" rows="1" size="75"/> 
             <% }  %>
          <h1>Enter your password</h1>
-           <textarea accesskey="Enter" rows="1" class="input" cols=100 name="password"></textarea>
-           <p><input id="1" class="button" type="submit" value="Enter"></p>
+           <input type="text" style="text-align:center;" id="password" wrap='hard' placeholder="Choose your password" accesskey="Enter" size="75"/>
+           <p><input type="button" id="1" class="button" id="Enterbutton" type="submit" value="Enter"></p>
            <% if (proverka == 1){%>
            <label>Пожалуйста, заполните все поля!</label>
            <%} %>
      </form>     
        <script>
-                          $(".input").keyup(function(event){
-                          if(event.keyCode == 13){
-                          $("#1").click();
-                          $(this).val('');
-                                                 }
-                                                                   });
+     var input = document.getElementById("login");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("myBtn").click();
+    }
+});
+           
+            var input = document.getElementById("password");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("Enterbutton").click();
+    }
+});
                       </script>
      
       </body>
