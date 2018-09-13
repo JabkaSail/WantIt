@@ -58,7 +58,7 @@ textarea {
     text-align: center;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 1.1em;
     outline: none;
 	-moz-appearance: none;
@@ -134,6 +134,14 @@ textarea {
          border: 0px solid #5389a6;
          border-radius: 7px;
      }  
+     
+     .groupDelButton{
+          margin-left: 1%;
+        background-color: #7f0000;
+         color: white;
+         border: 0px solid #7f0000;
+         border-radius: 100px;
+     }
       .WishtdNOTOWNER:hover{
      text-shadow: 0px 0px 2px white
 }
@@ -204,16 +212,16 @@ textarea {
                <% for (var i = (data.length - 1); i >= 0; i--){ %>
                 <tr>
                     <% if (user == data[i].Author){ %>
-                    <td onclick='Deltest'><a class="Wishtd" href = "delete/<%= data[i].uniqid %>"><%= data[i].Name %> </a> 
+                    <td><a class="Wishtd" href = "/groups/<%= data[i].uniqid %>"><%= data[i].Name %> </a> 
                          <% } else { %>
-                         <td onclick='Deltest'><a class="WishtdNOTOWNER" href = "delete/<%= data[i].uniqid %>"><%= data[i].Name %> </a> 
+                        <td><a class="Wishtd" href = "/groups/<%= data[i].uniqid %>"><%= data[i].Name %> </a>  
                          <% } %>
                          <% if (selected == data[i].Name){  %>
                          <input type="button" class="groupButtonSelected" value="Selected">
-                             <input type="button" class="groupButton" onclick="location.href='/groups/<%= data[i].uniqid %>/'" value="Menu">
+                             <input type="button" class="groupDelButton" onclick="location.href='delete/<%= data[i].uniqid %>/'" value="𐄂">
                         <% } else{ %>
                          <input type="button" class="groupButton" onclick="location.href='/select/<%= data[i].uniqid %>'" value="Select">
-                             <input type="button" class="groupButton" onclick="location.href='/groups/<%= data[i].uniqid %>/'" value="Menu">
+                            <input type="button" class="groupDelButton" onclick="location.href='delete/<%= data[i].uniqid %>/'" value="𐄂">
                         <% } %>
                        </td>
                <td><%= data[i].Author %></td>

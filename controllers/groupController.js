@@ -86,7 +86,7 @@ module.exports = function(app){
                         req.session.Group = 'none'
                     }
                     else {
-                    req.session.Group = popas[0].group;
+                    req.session.GroupName = popas[0].group;
                         }
         res.render('groups', {data: popa, user: req.session.User, selected: popas[0].group,  error: 1});
         });
@@ -144,7 +144,7 @@ module.exports = function(app){
        
                app.get('/groups/:group/', function(req, res){
                 if (req.session.User != null){
-          console.log(req.session.User + " group");
+          //console.log(req.session.User + " group");
           con.query("SELECT * FROM `GroupsDb` WHERE `uniqid` = ?", [req.params.group], function (err, rows, result) {
         if (err) throw err;
         var popas = JSON.parse(JSON.stringify(rows));
