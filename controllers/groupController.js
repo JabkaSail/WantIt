@@ -8,8 +8,8 @@ var uniqid = require('uniqid');
 var con = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'ApoD_rasStRELny',
- //password : 'password',
+ // password : 'ApoD_rasStRELny',
+ password : 'password',
   database : 'WantIt'
  });
 
@@ -31,7 +31,7 @@ module.exports = function(app){
                         req.session.Group = 'none'
                     }
                     else {
-                        req.session.GroupName = popa[0].Name;
+                        req.session.GroupName = popas[0].group
                     req.session.GroupCode = popa[0].uniqid;
                         }
         res.render('groups', {data: popa, user: req.session.User, selected: popas[0].group,  error: 0});
@@ -106,8 +106,13 @@ module.exports = function(app){
           if (req.session.User != null){
           con.query("DELETE FROM `GroupsDb` WHERE `uniqid` = ? AND `Author` = ?", [req.params.group, req.session.User], function (err, rows, result) {
         if (err) throw err;
+       
+             
+               con.query("DELETE FROM `GroupsDb` WHERE `uniqid` = ? AND `User` = ?", [req.params.group, req.session.User], function (err, rows, result) {
+        if (err) throw err;
          res.redirect('/groups');
               });
+               });
                     }
                     
                     else{
@@ -124,7 +129,12 @@ module.exports = function(app){
             req.session.GroupCode = req.params.group;
                  con.query("SELECT * FROM `GroupsDb` WHERE `User` = ? AND `uniqid` = ?", [req.session.User, req.session.GroupCode], function (err, rows, result) {
         if (err) throw err;
+            
               var popa = JSON.parse(JSON.stringify(rows));
+                     if (popa[0] == null){
+                         res.redirect('/groups');
+                     }
+                     else{
                    req.session.GroupName = popa[0].Name;
                           var value = {
                 group: req.session.GroupName
@@ -133,7 +143,9 @@ module.exports = function(app){
         if (err) throw err;
         
         res.redirect('/groups');
+              
                });
+                        } 
                       });
                 } 
     else{
@@ -229,7 +241,7 @@ module.exports = function(app){
                 });
                        }
                   else {
-                      req.redirect('/groups');
+                      res.redirect('/groups');
                   }
                    });
                }
