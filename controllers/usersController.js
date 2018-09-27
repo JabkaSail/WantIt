@@ -76,7 +76,7 @@ module.exports = function(app){
     //GET Login Req     
        
      app.get('/login', function(req, res){
-      res.render('reg',{CurrentLogin: 1, proverka: 0});
+      res.render('reg',{CurrentLogin: 0, proverka: 0});
       
      }); 
        

@@ -69,8 +69,10 @@ module.exports = function(app){
        
    con.query("INSERT INTO GroupsDb SET ?", values, function (err, rows, fields) {
               if (err) throw err;
+          con.query("UPDATE `UserDb` SET ? WHERE User = ?", [Group, req.session.User], function (err, rows, result) {
+        if (err) throw err;
             });
-                
+                }); 
           res.redirect('/groups');
                 }
                 else{
