@@ -8,8 +8,8 @@ var uniqid = require('uniqid');
 var con = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
- // password : 'ApoD_rasStRELny',
- password : 'password',
+  password : 'ApoD_rasStRELny',
+ //password : 'password',
   database : 'WantIt'
  });
 
@@ -135,6 +135,7 @@ module.exports = function(app){
                          res.redirect('/groups');
                      }
                      else{
+                          req.params.group = popa[0].Name;
                    req.session.GroupName = popa[0].Name;
                           var value = {
                 group: req.session.GroupName

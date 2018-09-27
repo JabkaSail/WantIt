@@ -3,7 +3,7 @@
  <head>
   <meta charset="utf-8">
   <title>WantIt</title>
-     
+    
      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300" rel="stylesheet">
@@ -40,6 +40,10 @@ th, td {
     padding-top: 1%;
     padding-bottom: 1%;
 }
+    .Wishtd:hover{
+    text-decoration: line-through;
+    color: rgba(200,80,80,0.5);
+}
 
 tr:nth-child(even){background-color: #162930}
 
@@ -48,22 +52,26 @@ th {
     background-color: #1e1833;
     color: white;
 }
-textarea {
-    width: 70%;
+.input {
+    width: 90%; 
     padding: 1%;
     text-align: center;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 15px;
     font-size: 1.1em;
     outline: none;
 	-moz-appearance: none;
 	border: 1px solid #110051;
     resize: none;
 	overflow: auto;
+    padding-bottom: 1%;
+   padding-top: 1%;
+   border: 1px solid black;
+   border-radius: 5px;
 }
         
-button {
+.add {
     background-color: #1e1833;
     border: none;
     color: white;
@@ -74,15 +82,6 @@ button {
     display: inline-block;
     font-size: 100%;
 }        
-     </style>
- </head>
- <body> 
-     
-   <header>
-    <h1 font-size="20px" align="center">WantIT</h1>
-           </header>
-     
-<style>
 .top-fixed_ul {
     z-index: 100;
     list-style-type: none;
@@ -114,46 +113,75 @@ button {
 .active {
     background-color: #4CAF50;
 }
-    .wishesAuthor:hover{
-    text-decoration: line-through;
-   
-        color: red;
-} 
-    
-    .wishesSelected{
-    text-decoration: line-through;
-        color: gray;
-} 
-    
-    .postScriptm{
-    text-decoration: none;
-        color: gray;
-}     
-    .wishes:hover{
-           text-decoration: underline;
-   
-        color: green;
-    }    
+     
+     .groupButtonSelected
+     {
+         margin-left: 1%;
+        background-color: green;
+         color: white;
+         border: 0px solid green;
+         border-radius: 7px;
+     }  
+      .groupButton
+     {
+         margin-left: 1%;
+        background-color: #5389a6;
+         color: white;
+         border: 0px solid #5389a6;
+         border-radius: 7px;
+     }  
+     
+     .groupDelButton{
+          margin-left: 1%;
+        background-color: #7f0000;
+         color: white;
+         border: 0px solid #7f0000;
+         border-radius: 50%;
+
+  box-shadow: 0 3px 20px rgba(0,0,0,.25),
+
+  inset 0 0 20px rgba(0,0,0,.1);
+     }
+          .groupDelButton:hover{
+          margin-left: 1%;
+        background-color: #9a0000;
+         color: white;
+         border: 0px solid #7f0000;
+         border-radius: 50%;
+
+  box-shadow: 0 3px 20px rgba(0,0,0,.25),
+
+  inset 0 0 20px rgba(0,0,0,.1);
+     }
+      .WishtdNOTOWNER:hover{
+     text-shadow: 0px 0px 2px white
+}
     </style>
-<nav>
+ </head>
+ <body> 
+     
+   <header>
+    <h1 font-size="20px" align="center">WantIT</h1>
+           </header>
+ <nav>
     <ul class="top-fixed_ul">
-        <li class="top-fixed_li"><a href="#">Wishes</a></li>
-        <li class="top-fixed_li"><a href="/groups">Groups</a></li>
-        <li class="top-fixed_li"><a href="/user/<%= user %>/">Account </a></li>
+        <li class="top-fixed_li"><a href="#">Желания</a></li>
+        <li class="top-fixed_li"><a href="/groups">Группы</a></li>
+        <li class="top-fixed_li"><a href="/user/<%= user %>/">Аккаунт </a></li>
     </ul>
 </nav>
-      <h4>Your Group name is - <%= group %> </h4>  
+      <h4>Название выбранной группы - <%= group %> </h4>  
          <div style="text-align:center;">
            <table>
                 <form method="POST"  text-align="center">
                <tr>
-            <th><textarea rows="1" cols=100 id = "input" name="AddWish" placeholder="Add new wish" style="width: 90%;"></textarea></th>
-                   <th><button id = "1" type="submit">Add</button></th>
+              <th><input type=text size="75"  rows="1" class="input"  id = "input" name="AddWish" placeholder="Добавить желание"/></th>
+                   <th><button class="add" id = "1" type="submit">Добавить</button></th>
                </tr>
                </form>
                 <tr>
-                    <th>Wish</th>
-                    <th>User name</th>
+                    <th>Желание</th>
+                    <th>Имя</th>
                     
                 </tr> 
                   <form method="DELETE"  text-align="center">
@@ -162,12 +190,12 @@ button {
                 <td onclick='Deltest'>
                     
                     <% if (user == data[i].User){  %>
-                     <a class="wishesAuthor" href = "delete/<%= data[i].Wish %>"><%= data[i].Wish %></a>
+                     <a class="Wishtd" href = "delete/<%= data[i].Wish %>"><%= data[i].Wish %></a>
                     
                         <% } else{ %>
                     <% if (data[i].Wid != 0){ %>
                      <% if (data[i].Wid == user){ %>
-                    <a class="wishesAuthor" href = "unselect/<%= data[i].Wish %>"><%= data[i].Wish %><A class="postScriptm" > (click to unselect)</A></a>
+                    <a class="Wishtd" href = "unselect/<%= data[i].Wish %>"><%= data[i].Wish %><A class="postScriptm" > (click to unselect)</A></a>
                      <% } else{%>
                     <a class="wishesSelected"><%= data[i].Wish %><A class="postScriptm" > (already selected)</A></a>
                     <% } %>

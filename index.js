@@ -7,9 +7,12 @@ var session = require('express-session');
 var wishController = require('./controllers/wishController.js');
 var groupController = require('./controllers/groupController.js');
 var usersController = require('./controllers/usersController.js');
+
 //var auhtorizationController = require('./controllers/autorisationController.js')
 app.set('view engine', 'ejs'); 
 var cookieParser = require('cookie-parser');
+var nodemailer = require('nodemailer');
+
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -21,8 +24,8 @@ app.use(session({secret: 'popkaPlusJopkadjhKPPйFj',
 var con = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  //password : 'ApoD_rasStRELny',
- password : 'password',
+  password : 'ApoD_rasStRELny',
+ //password : 'password',
   database : 'WantIt'
  });
 
@@ -35,10 +38,6 @@ app.get('/', function(req, res){
       }
      });
    
-       
-
-
-//auhtorizationController(app);
 usersController(app);
 groupController(app);
 wishController(app);

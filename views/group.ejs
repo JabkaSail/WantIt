@@ -140,9 +140,9 @@ textarea {
     </style>
 <nav>
     <ul class="top-fixed_ul">
-        <li class="top-fixed_li"><a href="/wishes/">Wishes</a></li>
-        <li class="top-fixed_li"><a href="/groups">Groups</a></li>
-        <li class="top-fixed_li"><a href="/user/<%= user %>/">Account </a></li>
+        <li class="top-fixed_li"><a href="/wishes/">Желания</a></li>
+        <li class="top-fixed_li"><a href="/groups">Группы</a></li>
+        <li class="top-fixed_li"><a href="/user/<%= user %>/">Аккаунт </a></li>
     </ul>
 </nav>
      <p>
@@ -151,12 +151,12 @@ textarea {
            <table>
                 <form method="POST"  text-align="center">
                <tr>
-                   <h4>Group name is <%= selected %></h4>
-                    <h5>Group invite code is 159.253.21.77:8080/group/invite/<%= data[0].InviteCode %></h5>
+                   <h4>Название вашей группы - <%= selected %></h4>
+                    <h5>Пригласительный код: 159.253.21.77:8080/group/invite/<%= data[0].InviteCode %></h5>
                </tr>
                </form>
                 <tr>
-                    <th>User</th>
+                    <th>Пользователь</th>
                 </tr>
                   <form text-align="center">
                <% for (var i = (data.length - 1); i >= 0; i--){ %>

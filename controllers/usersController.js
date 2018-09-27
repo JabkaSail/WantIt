@@ -10,8 +10,8 @@ app.use(cookieParser());
 var con = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
- // password : 'ApoD_rasStRELny',
- password : 'password',
+  password : 'ApoD_rasStRELny',
+ //password : 'password',
   database : 'WantIt'
  });
 
@@ -36,16 +36,18 @@ module.exports = function(app){
        
      app.post('/registration', urlencodedParser, function(req, res){
          var  User = req.body.login.replace(/^\s+|\s+$/g, '');
-          var    password = req.body.password.replace(/^\s+|\s+$/g, '');
+          var password = req.body.password.replace(/^\s+|\s+$/g, '');
+        var email = req.body.email.replace(/^\s+|\s+$/g, '');
         var values = {
         User: req.body.login.replace(/^\s+|\s+$/g, ''),
-        password: req.body.password.replace(/^\s+|\s+$/g, '')
+        password: req.body.password.replace(/^\s+|\s+$/g, ''),
+        email: req.body.email.replace(/^\s+|\s+$/g, ''),
     }
-          if (User == "" || password == ""){
+          if (User == "" || password == "" || email == "" ){
                    res.render('reg',{CurrentLogin: 1, proverka: 1});
           }
          else {
-                  con.query("SELECT User, password FROM `UserDb` WHERE `User` = ?", [req.body.login], function (err, rows, result) {
+                  con.query("SELECT User, password FROM `UserDb` WHERE `User` = ? OR `email` = ?", [req.body.login, req.body.email], function (err, rows, result) {
         if (err) throw err;
                        var popa = JSON.parse(JSON.stringify(rows));
                     if (popa[0] == undefined){
